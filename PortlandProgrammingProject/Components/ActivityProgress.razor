@@ -1,6 +1,10 @@
 ﻿@using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager Navigation
 
+<Progress Class="mb-3">
+    <ProgressBar Type="ProgressType.StripedAndAnimated" Color="ProgressColor.Dark" Width="@(progressPercent)" />
+</Progress>
+
 @code {
     private HubConnection? hubConnection;
     private double progressPercent = 0;
@@ -9,7 +13,7 @@
     protected override async Task OnInitializedAsync()
     {
         hubConnection = new HubConnectionBuilder()
-            .WithUrl(Navigation.ToAbsoluteUri("/taskhub"))
+            .WithUrl(Navigation.ToAbsoluteUri("/activityhub"))
             .Build();
 
         hubConnection.On<double>("Progress", (percent) =>
@@ -19,13 +23,15 @@
         });
 
         await hubConnection.StartAsync();
+        await hubConnection.SendAsync("Start", message);
     }
 
-    private async Task Send()
+    private async Task Stop()
     {
         if (hubConnection is not null)
         {
-            await hubConnection.SendAsync("SendMessage", message);
+            await hubConnection.SendAsync("Stop");
+            await hubConnection.StopAsync();
         }
     }
 
