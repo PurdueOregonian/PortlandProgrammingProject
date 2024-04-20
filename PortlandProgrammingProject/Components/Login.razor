@@ -1,6 +1,10 @@
-﻿@using Radzen.Blazor
-<RadzenLogin AllowRegister="false" AllowResetPassword="false" />
+﻿@using Radzen
+@using Radzen.Blazor
+<RadzenLogin AllowRegister="false" AllowResetPassword="false" Login="@(args => OnLogin(args))" />
 
 @code {
-
+    void OnLogin(LoginArgs args)
+    {
+        Console.WriteLine("Logging in");
+    }
 }
