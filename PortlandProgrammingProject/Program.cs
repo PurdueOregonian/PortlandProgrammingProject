@@ -2,6 +2,7 @@ using PortlandProgrammingProject.Components;
 using Blazored.Modal;
 using Microsoft.AspNetCore.ResponseCompression;
 using PortlandProgrammingProject.Hubs;
+using PortlandProgrammingProject.Job;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +15,11 @@ builder.Services.AddResponseCompression(opts =>
     opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
           new[] { "application/octet-stream" });
 });
+builder.Services.AddSingleton<ActivityService>();
 
 var app = builder.Build();
 
+app.Services.GetService<ActivityService>();
 app.UseResponseCompression();
 
 // Configure the HTTP request pipeline.
