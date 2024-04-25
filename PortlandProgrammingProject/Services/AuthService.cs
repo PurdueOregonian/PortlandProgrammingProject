@@ -1,7 +1,7 @@
-﻿using Friends5___Backend.Authentication;
+﻿using PortlandProgrammingProject.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace Friends5___Backend.Services
+namespace PortlandProgrammingProject.Services
 {
     public class AuthService : IAuthService
     {

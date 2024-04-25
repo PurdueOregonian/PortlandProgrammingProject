@@ -1,9 +1,12 @@
-﻿namespace PortlandProgrammingProject.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PortlandProgrammingProject.Data
 {
-    public struct User
+    public class User
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string FavoriteFood { get; set; }
     }
 }
